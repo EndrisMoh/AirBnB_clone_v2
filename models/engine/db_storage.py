@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" New engine SQL DBStorage class for sqlAlchemy """
+""" New engine DBStorage class for SQLAlchemy """
 from os import getenv
 from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy import (create_engine)
