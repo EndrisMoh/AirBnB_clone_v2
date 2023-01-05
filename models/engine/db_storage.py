@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """ New engine DBStorage class for SQLAlchemy """
+import models
+import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 from models.amenity import Amenity
@@ -19,12 +21,12 @@ classes = {"User": User, "State": State, "City": City,
 
 
 class DBStorage:
-    '''database storage engine for mysql storage'''
+    '''Database storage engine for MySQL database'''
     __engine = None
     __session = None
 
     def __init__(self):
-        '''instantiate new dbstorage instance'''
+        '''Instantiates a new dbstorage instance'''
         HBNB_MYSQL_USER = getenv('HBNB_MYSQL_USER')
         HBNB_MYSQL_PWD = getenv('HBNB_MYSQL_PWD')
         HBNB_MYSQL_HOST = getenv('HBNB_MYSQL_HOST')
