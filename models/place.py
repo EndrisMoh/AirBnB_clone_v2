@@ -25,8 +25,8 @@ if storage_type == 'db':
 
 class Place(BaseModel, Base):
     """ A place to stay """
-    __tablename__ = 'places'
     if storage_type == 'db':
+        __tablename__ = 'places'
         city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
         user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
         name = Column(String(128), nullable=False)
@@ -54,6 +54,11 @@ class Place(BaseModel, Base):
         longitude = 0.0
         amenity_ids = []
 
+    def __init__(self, *args, **kwargs):
+        """initializes Place"""
+        super().__init__(*args, **kwargs)
+
+    if storage_type != 'db':
         @property
         def reviews(self):
             ''' returns list of review instances with place_id
