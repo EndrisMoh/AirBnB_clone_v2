@@ -62,7 +62,7 @@ class BaseModel:
             returns a dictionary of all the key values in __dict__
         """
         dictionary = dict(self.__dict__)
-        dictinary["__class__"] = str(type(self).__name__)
+        dictionary["__class__"] = str(type(self).__name__)
         dictionary["created_at"] = self.created_at.isoformat()
         dictionary["updated_at"] = self.updated_at.isoformat()
 
