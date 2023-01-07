@@ -13,7 +13,8 @@ class State(BaseModel, Base):
     Attributes:
         name: input name
     """
-    __tablename__= 'states'
+    __tablename__ = 'states'
+
     if storage_type == "db":
         name = Column(String(128), nullable=False)
         cities = relationship("City", cascade="all", backref="state")
