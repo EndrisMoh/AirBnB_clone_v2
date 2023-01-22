@@ -70,11 +70,11 @@ web_static_{}/web_static'
         # re-establish symbolic link
         run('sudo ln -s /data/web_static/releases/\
 web_static_{}/ /data/web_static/current'.format(timestamp))
-        except Exception as ex:
-            return False
+    except Exception as ex:
+        return False
 
-        # return True on success
-        return True
+    # return True on success
+    return True
 
 
 def deploy():
