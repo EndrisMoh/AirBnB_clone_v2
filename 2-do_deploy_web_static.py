@@ -50,8 +50,8 @@ web_static_{}/web_static'
             # Create a new symbolic link on the web server
             run('sudo ln -s /data/web_static/releases/\
 web_static_{}/ /data/web_static/current'.format(timestamp))
-        except Exception as ex:
-            return False
+    except Exception as e:
+        return False
 
-        # Return True on success
-        return True
+    # Return True on success
+    return True
