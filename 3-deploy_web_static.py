@@ -16,7 +16,8 @@ def do_pack():
     """Function to compress directory
     Return: path to archive on success; None on fail
     """
-    # Getting current time
+
+# Getting current time
     now = datetime.now()
     now = now.strftime('%Y%m%d%H%M%S')
     archive_path = 'versions/web_static_' + now + '.tgz'
