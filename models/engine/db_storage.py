@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ New engine DBStorage class for SQLAlchemy """
+import json
 import models
 import sqlalchemy
 from sqlalchemy import create_engine
@@ -12,6 +13,7 @@ from models.review import Review
 from models.state import State
 from models.user import User
 from os import getenv
+
 
 if getenv('HBNB_TYPE_STORAGE') == 'db':
     from models.place import place_amenity
@@ -41,7 +43,7 @@ class DBStorage:
                                        ), pool_pre_ping=True)
 
         if HBNB_ENV == 'test':
-            Base.metadata.drop_all(self.__engine)
+            Base.metadata.drop_all(bind=self.__engine)
 
     def all(self, cls=None):
         '''query on the current db session all cls objects
@@ -49,7 +51,16 @@ class DBStorage:
         key = <class-name>.<object-id>
         value = object
         '''
-        dct = {}
+        new_dict = {}
+        for clss in classes:
+            if cls is None or cls is classes[clss] or cls is clss:
+                objs = self.__session.query(classes[clss]).all()
+                for obj in objs:
+                    key = obj.__class__.__name__ + '.' + obj.id
+                    new_dict[key] = obj
+        return (new_dict)
+
+        """dct = {}
         if cls is None:
             for c in classes.values():
                 objs = self.__session.query(c).all()
@@ -61,7 +72,7 @@ class DBStorage:
             for obj in objs:
                 key = obj.__class__.__name__ + '.' + obj.id
                 dct[key] = obj
-        return dct
+        return dct"""
 
     def new(self, obj):
         '''adds the obj to the current db session'''
@@ -83,8 +94,7 @@ class DBStorage:
             is it's not None
         '''
         if obj is not None:
-            self.__session.query(type(obj)).filter(
-                type(obj).id == obj.id).delete()
+            self.__session.delete(obj)
 
     def reload(self):
         '''reloads the database'''
