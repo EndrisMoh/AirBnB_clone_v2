@@ -59,7 +59,6 @@ class Place(BaseModel, Base):
         """initializes Place"""
         super().__init__(*args, **kwargs)
 
-    if storage_type != 'db':
         @property
         def reviews(self):
             ''' returns list of review instances with place_id
