@@ -10,6 +10,7 @@ Routes:
     (replace underscore _ symbols with a space)
 must use the option strict_slashes=False in your route definition
 """
+
 from flask import Flask as flask
 
 app = flask(__name__)
